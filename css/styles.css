@@ -1061,6 +1061,10 @@ a {
     padding: 72px 0;
   }
 
+  .h2-stacked, .h2-single {
+    font-size: 42px;
+  }
+
   .hero {
     padding: 100px 0 60px;
     min-height: auto;
