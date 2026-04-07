@@ -335,9 +335,9 @@
   // ============================================
   // 7. Form Submission — GHL API
   // ============================================
-  // GHL credentials are server-side in the Cloudflare Worker.
-  // Update this URL after deploying worker/ghl-proxy.js
-  var FORM_PROXY = 'https://cracka-ghl-proxy.nwd-server.dev';
+  var GHL_LOCATION_ID = 'MB0FQsSH7cixhHGS0hq0';
+  var GHL_PIT = 'pit-7264cdc8-3a9d-4faa-88b8-5095be6f3c9d';
+  var GHL_API = 'https://services.leadconnectorhq.com';
 
   var form = document.getElementById('register-form');
   if (form) {
@@ -375,17 +375,48 @@
         email: form.email.value.trim(),
         phone: form.phone.value.trim(),
         companyName: form.organisation.value.trim(),
-        website: form.website.value.trim() || undefined
+        website: form.website.value.trim() || undefined,
+        locationId: GHL_LOCATION_ID,
+        tags: ['cracka workshop'],
+        source: 'Cracka Systems - IES Landing Page'
       };
 
-      // POST to Cloudflare Worker proxy (credentials stay server-side)
-      fetch(FORM_PROXY, {
+      var ghlHeaders = {
+        'Authorization': 'Bearer ' + GHL_PIT,
+        'Content-Type': 'application/json',
+        'Version': '2021-07-28'
+      };
+
+      // Step 1: Create/update contact with tag
+      fetch(GHL_API + '/contacts/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: ghlHeaders,
         body: JSON.stringify(payload)
       })
       .then(function (res) {
-        if (!res.ok) throw new Error('Form submission error: ' + res.status);
+        if (!res.ok) throw new Error('GHL contact error: ' + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        var contactId = data.contact.id;
+
+        // Step 2: Create opportunity in Online Tradies Workshop pipeline
+        return fetch(GHL_API + '/opportunities/', {
+          method: 'POST',
+          headers: ghlHeaders,
+          body: JSON.stringify({
+            pipelineId: 'mwois8wGmq2K2tyGuV3j',
+            pipelineStageId: '32d46166-94ee-4424-8fa3-21cc484665fa',
+            locationId: GHL_LOCATION_ID,
+            contactId: contactId,
+            name: payload.firstName + ' ' + payload.lastName + ' — Cracka Workshop',
+            status: 'open',
+            source: 'Cracka Systems - IES Landing Page'
+          })
+        });
+      })
+      .then(function (res) {
+        if (!res.ok) throw new Error('GHL opportunity error: ' + res.status);
         return res.json();
       })
       .then(function () {
