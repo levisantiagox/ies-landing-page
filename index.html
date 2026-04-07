@@ -159,8 +159,13 @@
         <p class="hero__trust">Thursday <span class="dynamic-date">16 April 2026</span> &bull; 4pm AEST &bull; 11 seats only &bull; Recording included</p>
       </div>
       <div class="hero__visual" data-gsap="parallax">
+        <div class="hero__video-glow"></div>
         <div class="hero__video-wrapper">
-          <iframe src="https://player.vimeo.com/video/1173984418?autoplay=1&loop=1&muted=1&background=1&dnt=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen title="Cracka Systems workshop preview"></iframe>
+          <iframe id="hero-vimeo" src="https://player.vimeo.com/video/1173984418?autoplay=1&loop=1&muted=1&background=1&dnt=1&quality=1080p" frameborder="0" allow="autoplay; fullscreen" allowfullscreen title="Cracka Systems workshop preview"></iframe>
+          <button id="unmute-btn" class="hero__unmute" aria-label="Unmute video">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+            <span>TAP TO UNMUTE</span>
+          </button>
         </div>
       </div>
     </div>
@@ -568,6 +573,7 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
+  <script src="https://player.vimeo.com/api/player.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js" defer></script>
   <script src="js/main.js" defer></script>
