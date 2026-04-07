@@ -192,10 +192,6 @@ a {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-border);
-  transform: translateY(-100%);
-}
-
-.top-bar.is-visible {
   transform: translateY(0);
 }
 
