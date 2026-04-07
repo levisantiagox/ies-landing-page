@@ -250,10 +250,8 @@ a {
 }
 
 .hero .container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
+  max-width: 800px;
+  text-align: center;
 }
 
 .hero__h1 {
@@ -277,7 +275,9 @@ a {
   color: var(--color-offwhite);
   line-height: 1.6;
   margin-bottom: 32px;
-  max-width: 560px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero__proof {
@@ -285,6 +285,7 @@ a {
   align-items: stretch;
   gap: 16px;
   margin-bottom: 36px;
+  justify-content: center;
 }
 
 .yellow-bar-left {
@@ -307,52 +308,45 @@ a {
   margin-top: 16px;
 }
 
-/* Hero visual */
-.hero__visual {
+/* ============================================
+   VSL Video Section
+   ============================================ */
+.section--vsl {
+  padding: 40px 0 60px;
   position: relative;
+}
+
+.section--vsl .container {
   display: flex;
-  align-items: center;
   justify-content: center;
+  position: relative;
 }
 
-/* Video label — mobile/tablet only */
-.hero__video-label {
-  display: none;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--color-yellow);
-  text-align: center;
-  margin-bottom: 16px;
-}
-
-/* Video glow effect */
-.hero__video-glow {
+.vsl__glow {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 110%;
-  height: 110%;
-  background: radial-gradient(ellipse at center, rgba(255, 210, 0, 0.15) 0%, rgba(255, 210, 0, 0.05) 40%, transparent 70%);
+  width: 600px;
+  height: 800px;
+  background: radial-gradient(ellipse at center, rgba(255, 210, 0, 0.12) 0%, rgba(255, 210, 0, 0.04) 40%, transparent 70%);
   pointer-events: none;
   z-index: 0;
 }
 
-.hero__video-wrapper {
+.vsl__wrapper {
   position: relative;
   border-radius: 12px;
   overflow: hidden;
   background: #1a1a1a;
   width: 100%;
-  max-width: 400px;
+  max-width: 480px;
   aspect-ratio: 9 / 16;
   z-index: 1;
-  box-shadow: 0 0 40px rgba(255, 210, 0, 0.12), 0 0 80px rgba(255, 210, 0, 0.06);
+  box-shadow: 0 0 50px rgba(255, 210, 0, 0.12), 0 0 100px rgba(255, 210, 0, 0.06);
 }
 
-.hero__video-wrapper iframe {
+.vsl__wrapper iframe {
   position: absolute;
   top: 0;
   left: 0;
@@ -361,8 +355,7 @@ a {
   border: 0;
 }
 
-/* Video controls */
-.hero__controls {
+.vsl__controls {
   position: absolute;
   bottom: 16px;
   left: 50%;
@@ -1035,27 +1028,8 @@ a {
    Responsive: Tablet
    ============================================ */
 @media (max-width: 1024px) {
-  .hero .container {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .hero__visual {
-    max-width: 100%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .hero__video-label {
-    display: block;
-  }
-
-  .hero__video-wrapper {
-    max-width: 380px;
-    width: 100%;
-    margin: 0 auto;
+  .vsl__wrapper {
+    max-width: 420px;
   }
 
   .outcome-blocks {
@@ -1106,40 +1080,19 @@ a {
     font-size: 17px;
   }
 
-  .hero__visual {
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .hero__video-glow {
-    width: 120%;
-    height: 120%;
-  }
-
-  .hero__video-wrapper {
-    max-width: 85vw;
-    width: 100%;
-    margin: 0 auto;
-    aspect-ratio: 9 / 16;
+  .vsl__wrapper {
+    max-width: 90vw;
     border-radius: 16px;
-    box-shadow: 0 0 50px rgba(255, 210, 0, 0.15), 0 0 100px rgba(255, 210, 0, 0.08);
   }
 
-  .hero__controls {
+  .vsl__glow {
+    width: 100%;
+    height: 100%;
+  }
+
+  .vsl__controls {
     bottom: 12px;
     gap: 6px;
-  }
-
-  .hero__control-btn {
-    width: 38px;
-    height: 38px;
-  }
-
-  .hero__control-btn svg {
-    width: 15px;
-    height: 15px;
   }
 
   .btn--large {
