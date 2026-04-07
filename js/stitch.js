@@ -41,17 +41,41 @@
   var toastName = toast ? toast.querySelector('.toast__name') : null;
   var toastAction = toast ? toast.querySelector('.toast__action') : null;
 
-  var proofEntries = [
-    { name: 'Kyle from A-One Fencing', action: 'Registered 2 hours ago' },
-    { name: 'Ed from Ontop Roofing', action: 'Registered yesterday' },
-    { name: 'A gate fabricator in Brisbane', action: 'Just saved their seat' },
-    { name: 'Shane from Signature Fab', action: 'Registered this morning' },
-    { name: 'A metal roofer in Sydney', action: 'Registered 4 hours ago' },
-    { name: 'A fencing contractor in Melbourne', action: 'Just saved their seat' },
-    { name: 'Richard from Premier Gates', action: 'Attended last week\'s workshop' }
+  var proofNames = [
+    'A roofer in Ipswich',
+    'A fencer in Penrith',
+    'A gate fabricator in Logan',
+    'A roof restorer in Campbelltown',
+    'A metal roofer in Geelong',
+    'A fencing contractor in Caboolture',
+    'A fabricator in Dandenong',
+    'A roofer in Townsville',
+    'A fencer in Wollongong',
+    'A gate builder in Rockingham',
+    'A roof restorer in Toowoomba',
+    'A metal roofer in Bendigo',
+    'A fencing business in Cairns',
+    'A fabricator in Frankston',
+    'A roofer in Mackay'
   ];
 
-  var toastIndex = 0;
+  var proofActions = [
+    'Registered just now',
+    'Saved their seat 3 minutes ago',
+    'Just signed up',
+    'Registered 12 minutes ago',
+    'Saved their seat',
+    'Registered 25 minutes ago',
+    'Just locked in a spot',
+    'Signed up 8 minutes ago'
+  ];
+
+  function randomProofEntry() {
+    var name = proofNames[Math.floor(Math.random() * proofNames.length)];
+    var action = proofActions[Math.floor(Math.random() * proofActions.length)];
+    return { name: name, action: action };
+  }
+
   var toastTimer = null;
   var toastHideTimer = null;
   var toastsPaused = false;
@@ -62,7 +86,7 @@
     // Clear any pending hide
     if (toastHideTimer) clearTimeout(toastHideTimer);
 
-    var entry = proofEntries[toastIndex % proofEntries.length];
+    var entry = randomProofEntry();
     toastName.textContent = entry.name;
     toastAction.textContent = entry.action;
 
@@ -76,7 +100,6 @@
       toastHideTimer = null;
     }, 4000);
 
-    toastIndex++;
   }
 
   function scheduleNextToast() {
@@ -84,7 +107,7 @@
     if (toastTimer) clearTimeout(toastTimer);
     if (toastsPaused) return;
 
-    var delay = 25000 + Math.random() * 15000; // 25-40s
+    var delay = 15000 + Math.random() * 10000; // 15-25s
     toastTimer = setTimeout(function () {
       showToast();
       scheduleNextToast();
