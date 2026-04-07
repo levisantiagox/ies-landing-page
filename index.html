@@ -3,30 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Instant Estimate System — Live Workshop for Metal Trades | New Way</title>
+  <title>The Instant Estimate System — Live Workshop for Metal Trades | Cracka Systems</title>
   <meta name="description" content="Free live workshop for metal roofers, fencers, gate fabricators and roof restorers. Watch a working enquiry-to-estimate system get built live in 44 minutes.">
-  <meta property="og:title" content="The Instant Estimate System — Live Workshop for Metal Trades | New Way">
+  <meta property="og:title" content="The Instant Estimate System — Live Workshop for Metal Trades | Cracka Systems">
   <meta property="og:description" content="Free live workshop for metal roofers, fencers, gate fabricators and roof restorers. Watch a working enquiry-to-estimate system get built live in 44 minutes.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/images/og-image.jpg">
+  <meta property="og:image" content="assets/images/hero-banner.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/stitch.css">
 
-  <!-- Facebook Pixel (replace YOUR_PIXEL_ID) -->
+  <!-- Facebook Pixel -->
   <script>
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
     n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
     t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
     document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    // fbq('init', 'YOUR_PIXEL_ID');
-    // fbq('track', 'PageView');
+    fbq('init', '1269708681588720');
+    fbq('track', 'PageView');
   </script>
 
-  <!-- Google Analytics 4 (replace YOUR_GA4_ID) -->
-  <!--
+  <!-- Google Analytics 4: uncomment and replace YOUR_GA4_ID when ready
   <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA4_ID"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -35,8 +36,88 @@
     gtag('config', 'YOUR_GA4_ID');
   </script>
   -->
+
+  <!-- Structured Data: Event -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationEvent",
+    "name": "The Instant Estimate System — Live Workshop for Metal Trades",
+    "description": "Free live workshop for metal roofers, fencers, gate fabricators and roof restorers. Watch a working enquiry-to-estimate system get built live in 44 minutes.",
+    "organizer": {
+      "@type": "Organization",
+      "name": "Cracka Systems",
+      "url": "https://crackasystems.com.au"
+    },
+    "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "location": {
+      "@type": "VirtualLocation",
+      "url": "https://crackasystems.com.au"
+    },
+    "isAccessibleForFree": true,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "AUD",
+      "availability": "https://schema.org/LimitedAvailability"
+    },
+    "performer": {
+      "@type": "Person",
+      "name": "Levi Santiago"
+    }
+  }
+  </script>
+
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is this actually free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. No credit card, no upsell during the workshop, no surprise. The workshop is free because it's also how we find clients who want the done-for-you version. If that's not you, you still get the templates and the recording. Fair trade."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if I can't attend live?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Register anyway. You'll get the recording and all the templates by email the next day. But live is better, because you can ask questions in the chat and get them answered on the call."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "I'm not techy. Will this be over my head?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If you can use Facebook and send an email, you can run this system. The whole point is to replace the complicated stuff with a setup that runs on its own. I'll explain every step in plain English."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
+
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Social Proof Toast -->
+  <div id="social-proof-toast" class="social-proof-toast" aria-live="polite" aria-hidden="true">
+    <div class="toast__icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="toast__content">
+      <p class="toast__name"></p>
+      <p class="toast__action"></p>
+    </div>
+  </div>
 
   <!-- ============================================
        SECTION 1: Sticky Top Bar
@@ -44,9 +125,9 @@
   <header id="top-bar" class="top-bar">
     <div class="top-bar__inner">
       <a href="#" class="top-bar__logo" aria-label="Back to top">
-        <!-- Replace with New Way logo SVG -->
-        <svg class="logo-svg" viewBox="0 0 140 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <text x="0" y="30" font-family="Inter, sans-serif" font-weight="900" font-size="28" fill="#FFFFFF">NEW WAY</text>
+        <!-- Replace with Cracka Systems logo SVG -->
+        <svg class="logo-svg" viewBox="0 0 310 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="30" font-family="Inter, sans-serif" font-weight="900" font-size="28" fill="#FFFFFF">CRACKA SYSTEMS</text>
         </svg>
       </a>
       <p class="top-bar__info">
@@ -63,12 +144,13 @@
     <div class="container">
       <div class="hero__content">
         <p class="eyebrow">LIVE WORKSHOP &bull; BUILT FOR UNIT-RATE TRADES</p>
-        <h1 class="hero__h1" data-gsap="split">
-          <span class="hero__line">ENQUIRY.</span>
-          <span class="hero__line">ESTIMATE.</span>
-          <span class="hero__line hero__line--yellow">IN MINUTES.</span>
+        <h1 class="hero__h1">
+          <span class="hero__line">ENQUIRY</span>
+          <span class="hero__line">TO ESTIMATE</span>
+          <span class="hero__line">WHILE YOU'RE</span>
+          <span class="hero__line hero__line--yellow">ON THE TOOLS</span>
         </h1>
-        <p class="hero__subhead">The 44-minute live build that shows metal roofers, fencers, gate fabricators and roof restorers how to respond faster, filter tyre-kickers, and send online estimates before your competitors have even picked up the phone.</p>
+        <p class="hero__subhead">44 minutes. Live build. I'll show metal roofers, fencers, fabricators and roof restorers how to quote every lead, kill the tyre-kickers, and book the job before the phone even rings.</p>
         <div class="hero__proof">
           <div class="yellow-bar-left"></div>
           <p>We built this system for Richard at Premier Gates. He went from 30 leads a month to over 150.</p>
@@ -78,16 +160,10 @@
       </div>
       <div class="hero__visual" data-gsap="parallax">
         <div class="hero__image-wrapper">
-          <!-- Replace src with actual hero photo of Levi -->
-          <div class="hero__image-placeholder">
-            <p>HERO PHOTO<br>Levi at laptop with GHL workflow</p>
-          </div>
-          <div class="hero__overlay-bar">
-            <span>ENQUIRY &rarr; ESTIMATE &rarr; SENT.</span>
-          </div>
-          <div class="hero__inset">
-            <p>Estimate email preview</p>
-          </div>
+          <picture>
+            <source srcset="assets/images/hero-banner.webp" type="image/webp">
+            <img src="assets/images/hero-banner.png" alt="Tradie holding tablet with quoting system on site" class="hero__image" width="1080" height="1080">
+          </picture>
         </div>
       </div>
     </div>
@@ -98,7 +174,7 @@
        ============================================ -->
   <section id="press" class="section section--press">
     <div class="container">
-      <p class="press__subhead">NEW WAY AS FEATURED IN</p>
+      <p class="press__subhead">CRACKA SYSTEMS AS FEATURED IN</p>
       <div class="press__logos">
         <div class="press__track">
           <div class="press__logo">Yahoo Finance</div>
@@ -120,6 +196,11 @@
       </div>
     </div>
   </section>
+
+  <!-- Stitch: Arrow connector -->
+  <div class="stitch-connector" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+  </div>
 
   <!-- ============================================
        SECTION 4: The Problem
@@ -152,6 +233,11 @@
       </div>
     </div>
   </section>
+
+  <!-- Stitch: Micro CTA -->
+  <div class="stitch-micro-cta" aria-hidden="true">
+    <p>Still reading? Good. Here's the proof. <a href="#register">Save my seat &rarr;</a></p>
+  </div>
 
   <!-- ============================================
        SECTION 5: Social Proof / Case Studies
@@ -191,6 +277,11 @@
       </div>
     </div>
   </section>
+
+  <!-- Stitch: Arrow connector -->
+  <div class="stitch-connector" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+  </div>
 
   <!-- ============================================
        SECTION 6: What You'll Walk Away With
@@ -243,9 +334,11 @@
         <div class="qualifier qualifier--no">
           <h3 class="qualifier__title">NOT FOR YOU IF:</h3>
           <ul class="qualifier__list">
-            <li><span class="icon-cross" data-gsap="draw"></span> You want a "done-for-you" service handed to you on day one (book a call instead)</li>
-            <li><span class="icon-cross" data-gsap="draw"></span> You charge hourly or quote every job site-specific with zero repeatability</li>
-            <li><span class="icon-cross" data-gsap="draw"></span> You're looking for general marketing theory or business coaching</li>
+            <li><span class="icon-cross" data-gsap="draw"></span> You enjoy quoting at 9pm with a warm beer and a cold dinner.</li>
+            <li><span class="icon-cross" data-gsap="draw"></span> You think "she'll be right" is a pipeline strategy.</li>
+            <li><span class="icon-cross" data-gsap="draw"></span> Losing jobs to the bloke down the road is basically your cardio.</li>
+            <li><span class="icon-cross" data-gsap="draw"></span> You want a done-for-you handout. Cool, book a call, this isn't that.</li>
+            <li><span class="icon-cross" data-gsap="draw"></span> You secretly love complaining about your business more than running it.</li>
           </ul>
         </div>
       </div>
@@ -253,30 +346,38 @@
   </section>
 
   <!-- ============================================
-       SECTION 8: About Levi + New Way
+       SECTION 8: About Levi + Cracka Systems
        ============================================ -->
   <section id="about" class="section section--about">
     <div class="container">
       <div class="about__grid">
         <div class="about__photo">
-          <!-- Replace with actual headshot -->
-          <div class="about__photo-placeholder">
-            <p>LEVI<br>HEADSHOT</p>
-          </div>
+          <picture>
+            <source srcset="assets/images/levi-headshot.webp" type="image/webp">
+            <img src="assets/images/levi-headshot.jpeg" alt="Levi Santiago headshot" class="about__headshot" width="704" height="704" loading="lazy">
+          </picture>
         </div>
         <div class="about__content">
           <p class="eyebrow">WHO'S RUNNING THIS</p>
-          <h3 class="about__h3">I'M LEVI. I RUN NEW WAY.</h3>
-          <p class="about__body">New Way is a business growth agency on the Gold Coast, featured in Yahoo Finance, Bloomberg, Business Insider, MarketWatch and Benzinga. We build AI and automation systems for trades businesses that want to stop drowning in admin and start winning more jobs. I built the Instant Estimate System inside a real fencing business first, used it myself to perfect it, and watched quote time drop from 45 minutes to under 5. Since then I've rolled it out across metal roofers, gate fabricators, fencing companies and roofing contractors. This workshop is me pulling back the curtain and building it live in front of you, so you can take it home and run it yourself.</p>
+          <h3 class="about__h3">I'M LEVI. I RUN CRACKA SYSTEMS.</h3>
+          <p class="about__body">Cracka Systems is a model I built inside New Way Business, my growth partner agency on the Gold Coast, featured in Yahoo Finance, Bloomberg, Business Insider, MarketWatch and Benzinga.</p>
+          <p class="about__body">New Way is the full stack. Custom website design and development, end-to-end marketing, coaching and mentoring for service-based business owners, and AI and automation systems built for trades that want to stop drowning in admin and start winning more jobs.</p>
+          <p class="about__body">Cracka Systems is the trades-specific arm. I built the Instant Estimate System inside a real fencing business first, used it myself, and watched quote time drop from 45 minutes to under 5. Since then I've rolled it out across metal roofers, gate fabricators, fencing companies and roof restorers.</p>
+          <p class="about__body">This workshop is me pulling back the curtain and building it live in front of you, so you can take it home and run it yourself.</p>
           <a href="#" class="about__logo" aria-label="Back to top">
-            <svg class="logo-svg logo-svg--small" viewBox="0 0 120 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <text x="0" y="26" font-family="Inter, sans-serif" font-weight="900" font-size="24" fill="#FFFFFF">NEW WAY</text>
+            <svg class="logo-svg logo-svg--small" viewBox="0 0 280 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <text x="0" y="26" font-family="Inter, sans-serif" font-weight="900" font-size="24" fill="#FFFFFF">CRACKA SYSTEMS</text>
             </svg>
           </a>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Stitch: Micro CTA -->
+  <div class="stitch-micro-cta" aria-hidden="true">
+    <p>That's who's running it. Now here's what you get. <a href="#register">Lock in your seat &rarr;</a></p>
+  </div>
 
   <!-- ============================================
        SECTION 9: Bonuses
@@ -330,9 +431,12 @@
   <section id="strategy-call" class="section section--strategy">
     <div class="container">
       <h2 class="h2-single" data-gsap="reveal">CAN'T WAIT UNTIL THURSDAY?</h2>
-      <p class="section__body">If you've already decided you want this built inside your business and you don't want to wait for the workshop, book a 20-minute call instead. We'll map out what it would look like for your specific trade and pricing.</p>
+      <p class="section__body">Already know you want this thing built inside your business? Don't wait for the workshop.</p>
+      <p class="section__body">Book a 35-minute Cracka Strategy Call and we'll map out exactly what it looks like for your trade, your pricing, and your pipeline.</p>
+      <p class="section__body">And if your website's a dog, or you're not getting enough leads through the door to even need a quoting system yet, we'll sort that too. New Way builds custom websites, landing pages and full marketing engines that print high-value customers and keep your pipeline full, so by the time the Instant Estimate System kicks in, you've actually got leads worth quoting.</p>
+      <p class="section__body">One call. Twenty minutes. No fluff. You'll walk away knowing exactly what to build, what to fix, and what it'll cost to get it running.</p>
       <!-- Replace href with actual GHL/Calendly booking URL -->
-      <a href="#" class="btn btn--outline" target="_blank" rel="noopener" data-track="strategy_call_click">BOOK A 20-MIN STRATEGY CALL &rarr;</a>
+      <a href="https://links.yourpipeline.au/widget/booking/gSsifEVdxhghu2DClvFZ" class="btn btn--outline" target="_blank" rel="noopener" data-track="strategy_call_click">BOOK A 35-MIN STRATEGY CALL &rarr;</a>
     </div>
   </section>
 
@@ -386,6 +490,12 @@
       </h2>
       <p class="section__body">If you're sick of writing quotes at 8pm and losing jobs to whoever replied first, this is your fix. When the seats are gone, registration closes until next week.</p>
 
+      <!-- Live urgency bar -->
+      <div class="urgency-bar">
+        <div class="urgency-bar__pulse"></div>
+        <span class="urgency-bar__text"><strong id="seats-remaining">7</strong> of 11 seats remaining &mdash; Thursday <span class="dynamic-date">16 April 2026</span></span>
+      </div>
+
       <div class="form-wrapper">
         <!--
           GHL FORM EMBED: Replace this placeholder form with the actual GHL iframe embed code.
@@ -422,11 +532,16 @@
               <input type="url" id="website" name="website" autocomplete="url">
             </div>
           </div>
+          <!-- Honeypot — hidden from real users, bots will fill it -->
+          <div class="form-field" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;opacity:0;height:0;overflow:hidden;" tabindex="-1">
+            <label for="company_url">Company URL</label>
+            <input type="text" id="company_url" name="company_url" autocomplete="off" tabindex="-1">
+          </div>
           <button type="submit" class="btn btn--primary btn--large btn--full">YES, SAVE MY SEAT (IT'S FREE)</button>
         </form>
       </div>
 
-      <p class="register__fine-print">Thursday <span class="dynamic-date">16 April 2026</span> &bull; 4pm AEST / 5pm AEDT &bull; 44 minutes &bull; Recording included</p>
+      <p class="register__fine-print">Thursday <span class="dynamic-date">16 April 2026</span> &bull; 4pm AEST &bull; 44 minutes &bull; Recording included</p>
     </div>
   </section>
 
@@ -437,11 +552,11 @@
     <div class="container footer__inner">
       <div class="footer__top">
         <a href="#" class="footer__logo" aria-label="Back to top">
-          <svg class="logo-svg logo-svg--small" viewBox="0 0 120 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <text x="0" y="26" font-family="Inter, sans-serif" font-weight="900" font-size="24" fill="#FFFFFF">NEW WAY</text>
+          <svg class="logo-svg logo-svg--small" viewBox="0 0 280 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="0" y="26" font-family="Inter, sans-serif" font-weight="900" font-size="24" fill="#FFFFFF">CRACKA SYSTEMS</text>
           </svg>
         </a>
-        <p class="footer__tagline">A workshop by New Way | Gold Coast, QLD</p>
+        <p class="footer__tagline">A workshop by Cracka Systems | Gold Coast, QLD</p>
       </div>
       <p class="footer__legal">Copyright &copy; 2026 The Instant Estimate System&trade; | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
     </div>
@@ -455,9 +570,10 @@
   </div>
 
   <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
-  <script src="js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/stitch.js" defer></script>
 </body>
 </html>

@@ -88,7 +88,7 @@ a {
 }
 
 .h2-stacked {
-  font-size: clamp(40px, 8vw, 80px);
+  font-size: 62px;
 }
 
 .h2-stacked span {
@@ -96,7 +96,7 @@ a {
 }
 
 .h2-single {
-  font-size: clamp(36px, 6vw, 64px);
+  font-size: 62px;
 }
 
 .text--yellow {
@@ -214,7 +214,7 @@ a {
 }
 
 .logo-svg {
-  width: 140px;
+  width: 220px;
   height: auto;
 }
 
@@ -239,8 +239,8 @@ a {
    SECTION 2: Hero
    ============================================ */
 .hero {
-  padding: 140px 0 80px;
-  min-height: 100vh;
+  padding: 120px 0 40px;
+  min-height: auto;
   display: flex;
   align-items: center;
 }
@@ -253,7 +253,7 @@ a {
 }
 
 .hero__h1 {
-  font-size: clamp(56px, 10vw, 120px);
+  font-size: 80px;
   font-weight: 900;
   line-height: 0.9;
   text-transform: uppercase;
@@ -306,6 +306,9 @@ a {
 /* Hero visual */
 .hero__visual {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero__image-wrapper {
@@ -313,53 +316,16 @@ a {
   border-radius: 8px;
   overflow: hidden;
   background: var(--color-bg-card);
-  aspect-ratio: 4/3;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1 / 1;
 }
 
-.hero__image-placeholder {
+.hero__image {
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
-  color: var(--color-muted);
-  font-size: 14px;
-  text-align: center;
-  padding: 20px;
-  border: 2px dashed var(--color-border);
-}
-
-.hero__overlay-bar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: var(--color-yellow);
-  color: #000;
-  font-weight: 900;
-  font-size: 14px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 12px 20px;
-  text-align: center;
-}
-
-.hero__inset {
-  position: absolute;
-  bottom: 50px;
-  right: 16px;
-  width: 140px;
-  height: 100px;
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  color: var(--color-muted);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  object-fit: contain;
+  border-radius: 8px;
 }
 
 /* ============================================
@@ -384,14 +350,17 @@ a {
 .press__logos {
   overflow: hidden;
   position: relative;
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
 }
 
 .press__track {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 48px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  animation: marquee 20s linear infinite;
+  width: max-content;
 }
 
 .press__logo {
@@ -425,13 +394,8 @@ a {
   display: flex;
   gap: 24px;
   align-items: flex-start;
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.punch.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 .punch__num {
@@ -479,13 +443,8 @@ a {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.case-card.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 .case-card__number {
@@ -534,13 +493,8 @@ a {
   padding: 36px 28px;
   position: relative;
   overflow: hidden;
-  opacity: 0;
-  transform: translateX(-40px);
-}
-
-.outcome-block.is-visible {
   opacity: 1;
-  transform: translateX(0);
+  transform: none;
 }
 
 .outcome-block::before {
@@ -693,18 +647,13 @@ a {
   align-items: start;
 }
 
-.about__photo-placeholder {
+.about__headshot {
   width: 240px;
   height: 240px;
   border-radius: 50%;
-  background: var(--color-bg-card);
-  border: 2px dashed var(--color-border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-muted);
-  font-size: 14px;
-  text-align: center;
+  object-fit: cover;
+  object-position: center top;
+  border: 3px solid var(--color-yellow);
 }
 
 .about__h3 {
@@ -728,7 +677,7 @@ a {
 }
 
 .logo-svg--small {
-  width: 100px;
+  width: 160px;
   height: auto;
 }
 
@@ -748,13 +697,8 @@ a {
   align-items: flex-start;
   padding: 24px 0;
   border-bottom: 1px solid var(--color-border);
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.bonus-item.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 .bonus-item__num {
@@ -1027,6 +971,11 @@ a {
 
   .hero__visual {
     max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .hero__image-wrapper {
+    max-width: 100%;
   }
 
   .outcome-blocks {
@@ -1039,7 +988,7 @@ a {
     text-align: center;
   }
 
-  .about__photo-placeholder {
+  .about__headshot {
     margin: 0 auto;
   }
 
@@ -1073,6 +1022,15 @@ a {
     font-size: 17px;
   }
 
+  .hero__visual {
+    max-width: 100%;
+  }
+
+  .hero__image-wrapper {
+    max-width: 100%;
+    aspect-ratio: 1 / 1;
+  }
+
   .btn--large {
     font-size: 16px;
     padding: 18px 28px;
@@ -1089,7 +1047,7 @@ a {
   }
 
   .logo-svg {
-    width: 100px;
+    width: 160px;
   }
 
   /* Case study cards stack */

@@ -1,0 +1,270 @@
+/* ============================================
+   Thank You Page — Styles
+   Extends styles.css base tokens and components
+   ============================================ */
+
+/* ============================================
+   Header
+   ============================================ */
+.ty-header {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.ty-header .container {
+  display: flex;
+  align-items: center;
+}
+
+/* ============================================
+   Confirmation Hero
+   ============================================ */
+.ty-hero {
+  text-align: center;
+  padding: 100px 0 60px;
+}
+
+.ty-hero__badge {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.ty-hero__badge svg {
+  width: 72px;
+  height: 72px;
+  animation: badge-pop 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes badge-pop {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.ty-hero__h1 {
+  font-size: 62px;
+  font-weight: 900;
+  line-height: 0.95;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+.ty-hero__h1 span {
+  display: block;
+}
+
+.ty-hero__details {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.ty-detail {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  color: var(--color-offwhite);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 14px 20px;
+}
+
+.ty-detail__icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--color-yellow);
+}
+
+.ty-detail__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.ty-hero__urgency {
+  font-size: 17px;
+  color: var(--color-muted);
+  font-weight: 500;
+}
+
+/* ============================================
+   What Happens Next
+   ============================================ */
+.ty-next {
+  padding: 80px 0;
+}
+
+.ty-next__heading {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-yellow);
+  margin-bottom: 40px;
+}
+
+.ty-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 700px;
+}
+
+.ty-step {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.ty-step:first-child {
+  padding-top: 0;
+}
+
+.ty-step__num {
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--color-yellow);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 50px;
+}
+
+.ty-step__title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--color-white);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.ty-step__body {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--color-offwhite);
+}
+
+.ty-signoff {
+  margin-top: 48px;
+  font-size: 20px;
+  color: var(--color-offwhite);
+  line-height: 1.6;
+}
+
+.ty-signoff strong {
+  color: var(--color-yellow);
+}
+
+/* ============================================
+   Strategy Call CTA
+   ============================================ */
+.ty-cta {
+  padding: 0 0 100px;
+}
+
+.ty-cta__card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 60px 48px;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.ty-cta__card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-yellow) 0%, var(--color-orange) 100%);
+}
+
+.ty-cta__card .h2-single {
+  margin-bottom: 24px;
+}
+
+.ty-cta__body {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--color-offwhite);
+  max-width: 600px;
+  margin: 0 auto 36px;
+}
+
+.ty-cta__scarcity {
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--color-muted);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Responsive: Tablet
+   ============================================ */
+@media (max-width: 1024px) {
+  .ty-hero__h1 {
+    font-size: 52px;
+  }
+
+  .ty-cta__card {
+    padding: 48px 32px;
+  }
+}
+
+/* ============================================
+   Responsive: Mobile
+   ============================================ */
+@media (max-width: 640px) {
+  .ty-hero {
+    padding: 80px 0 48px;
+  }
+
+  .ty-hero__h1 {
+    font-size: clamp(36px, 10vw, 52px);
+  }
+
+  .ty-hero__details {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .ty-detail {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .ty-step {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ty-cta__card {
+    padding: 40px 24px;
+  }
+
+  .ty-cta__card .h2-single {
+    font-size: clamp(28px, 8vw, 48px);
+  }
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .ty-hero__badge svg {
+    animation: none;
+  }
+}

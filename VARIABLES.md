@@ -88,6 +88,6 @@ File: `index.html`, line ~29. Uncomment the script block and replace `YOUR_GA4_I
 |---|---|---|
 | Hero photo placeholder | Section 2 `.hero__image-placeholder` | `<img>` tag with actual photo |
 | Headshot placeholder | Section 8 `.about__photo-placeholder` | `<img>` tag with actual headshot |
-| Text logos "NEW WAY" | Header, Section 8, Footer | Actual SVG logo file |
+| Text logos "CRACKA SYSTEMS" | Header, Section 8, Footer | Actual SVG logo file |
 | Press logo text | Section 3 `.press__logo` | Actual SVG logo images |
 | Client logos | Section 5 case cards | Actual client logo images |

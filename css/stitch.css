@@ -1,0 +1,233 @@
+/* ============================================
+   CRO Stitch Elements
+   Scroll progress, section connectors, social
+   proof toasts, urgency bar, micro-CTAs
+   ============================================ */
+
+/* ============================================
+   1. Scroll Progress Bar
+   ============================================ */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--color-yellow) 0%, var(--color-orange) 100%);
+  z-index: 1001;
+  transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+/* ============================================
+   2. Section Stitch Connectors
+   ============================================ */
+.stitch-connector {
+  display: flex;
+  justify-content: center;
+  padding: 24px 0;
+  opacity: 0.3;
+}
+
+.stitch-connector svg {
+  width: 28px;
+  height: 28px;
+  color: var(--color-yellow);
+  animation: stitch-bounce 2s ease-in-out infinite;
+}
+
+@keyframes stitch-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* ============================================
+   3. Micro CTA Stitches
+   ============================================ */
+.stitch-micro-cta {
+  text-align: center;
+  padding: 28px var(--gutter);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  background: rgba(255, 210, 0, 0.02);
+}
+
+.stitch-micro-cta p {
+  font-size: 15px;
+  color: var(--color-muted);
+  font-weight: 500;
+}
+
+.stitch-micro-cta a {
+  color: var(--color-yellow);
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.stitch-micro-cta a:hover {
+  color: var(--color-white);
+  text-decoration: underline;
+}
+
+/* ============================================
+   4. Social Proof Toast
+   ============================================ */
+.social-proof-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(17, 17, 17, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 14px 20px;
+  z-index: 998;
+  opacity: 0;
+  transform: translateY(20px) translateX(-20px);
+  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+  pointer-events: none;
+  max-width: 340px;
+}
+
+.social-proof-toast.is-visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0);
+  pointer-events: auto;
+}
+
+.toast__icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  background: rgba(255, 210, 0, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toast__icon svg {
+  width: 16px;
+  height: 16px;
+  color: var(--color-yellow);
+}
+
+.toast__name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-white);
+  line-height: 1.3;
+}
+
+.toast__action {
+  font-size: 12px;
+  color: var(--color-muted);
+  line-height: 1.3;
+  margin-top: 2px;
+}
+
+/* ============================================
+   5. Urgency Bar (Registration Section)
+   ============================================ */
+.urgency-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 24px;
+  background: rgba(255, 210, 0, 0.06);
+  border: 1px solid rgba(255, 210, 0, 0.15);
+  border-radius: 8px;
+  margin-bottom: 32px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.urgency-bar__pulse {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-yellow);
+  flex-shrink: 0;
+  animation: urgency-pulse 2s ease-in-out infinite;
+}
+
+@keyframes urgency-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 210, 0, 0.5);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 210, 0, 0);
+    opacity: 0.7;
+  }
+}
+
+.urgency-bar__text {
+  font-size: 14px;
+  color: var(--color-offwhite);
+  font-weight: 500;
+}
+
+.urgency-bar__text strong {
+  color: var(--color-yellow);
+  font-weight: 900;
+  font-size: 16px;
+}
+
+/* ============================================
+   6. Responsive
+   ============================================ */
+@media (max-width: 640px) {
+  .social-proof-toast {
+    left: 12px;
+    right: 12px;
+    bottom: 70px; /* above sticky mobile CTA */
+    max-width: none;
+  }
+
+  .stitch-connector {
+    padding: 16px 0;
+  }
+
+  .stitch-micro-cta {
+    padding: 20px var(--gutter);
+  }
+
+  .stitch-micro-cta p {
+    font-size: 14px;
+  }
+
+  .urgency-bar {
+    padding: 12px 16px;
+    gap: 10px;
+  }
+
+  .urgency-bar__text {
+    font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stitch-connector svg {
+    animation: none;
+  }
+
+  .urgency-bar__pulse {
+    animation: none;
+  }
+
+  .social-proof-toast {
+    transition: none;
+  }
+
+  .scroll-progress {
+    transition: none;
+  }
+}

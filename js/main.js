@@ -59,11 +59,6 @@
       smoothWheel: true
     });
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
   }
 
   // ============================================
@@ -72,7 +67,7 @@
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Sync Lenis with ScrollTrigger
+    // Sync Lenis with ScrollTrigger (single RAF via GSAP ticker)
     if (lenis) {
       lenis.on('scroll', ScrollTrigger.update);
       gsap.ticker.add(function (time) {
@@ -252,6 +247,7 @@
   var heroSection = document.getElementById('hero');
   var registerSection = document.getElementById('register');
 
+  var stickyTicking = false;
   function updateStickyCta() {
     if (!stickyCta || !heroSection || !registerSection) return;
     if (window.innerWidth > 640) {
@@ -273,8 +269,18 @@
     }
   }
 
-  window.addEventListener('scroll', updateStickyCta, { passive: true });
-  window.addEventListener('resize', updateStickyCta, { passive: true });
+  function onStickyScroll() {
+    if (!stickyTicking) {
+      requestAnimationFrame(function () {
+        updateStickyCta();
+        stickyTicking = false;
+      });
+      stickyTicking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onStickyScroll, { passive: true });
+  window.addEventListener('resize', onStickyScroll, { passive: true });
 
   // ============================================
   // 5. FAQ Accordion
@@ -327,8 +333,12 @@
   });
 
   // ============================================
-  // 7. Form Submission (placeholder)
+  // 7. Form Submission — GHL API
   // ============================================
+  var GHL_LOCATION_ID = 'MB0FQsSH7cixhHGS0hq0';
+  var GHL_PIT = 'pit-7264cdc8-3a9d-4faa-88b8-5095be6f3c9d';
+  var GHL_API = 'https://services.leadconnectorhq.com';
+
   var form = document.getElementById('register-form');
   if (form) {
     form.addEventListener('submit', function (e) {
@@ -348,16 +358,81 @@
 
       if (!valid) return;
 
-      trackEvent('workshop_register');
+      // Honeypot check — if filled, silently reject (bot)
+      var honeypot = form.querySelector('#company_url');
+      if (honeypot && honeypot.value) {
+        console.log('[IES] Honeypot triggered — submission blocked.');
+        return;
+      }
 
-      // TODO: Replace with actual GHL form submission
-      // For now, show success feedback
       var submitBtn = form.querySelector('button[type="submit"]');
-      submitBtn.textContent = 'REGISTERED! CHECK YOUR EMAIL.';
+      submitBtn.textContent = 'SUBMITTING...';
       submitBtn.disabled = true;
-      submitBtn.style.opacity = '0.7';
 
-      console.log('[IES] Form submitted. Replace this with GHL API call.');
+      var payload = {
+        firstName: form.first_name.value.trim(),
+        lastName: form.last_name.value.trim(),
+        email: form.email.value.trim(),
+        phone: form.phone.value.trim(),
+        companyName: form.organisation.value.trim(),
+        website: form.website.value.trim() || undefined,
+        locationId: GHL_LOCATION_ID,
+        tags: ['cracka workshop'],
+        source: 'Cracka Systems - IES Landing Page'
+      };
+
+      var headers = {
+        'Authorization': 'Bearer ' + GHL_PIT,
+        'Content-Type': 'application/json',
+        'Version': '2021-07-28'
+      };
+
+      // Step 1: Create/update contact with tag
+      fetch(GHL_API + '/contacts/', {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(payload)
+      })
+      .then(function (res) {
+        if (!res.ok) throw new Error('GHL contact error: ' + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        var contactId = data.contact.id;
+
+        // Step 2: Create opportunity in Online Tradies Workshop pipeline → Opt in (not paid)
+        return fetch(GHL_API + '/opportunities/', {
+          method: 'POST',
+          headers: headers,
+          body: JSON.stringify({
+            pipelineId: 'mwois8wGmq2K2tyGuV3j',
+            pipelineStageId: '32d46166-94ee-4424-8fa3-21cc484665fa',
+            locationId: GHL_LOCATION_ID,
+            contactId: contactId,
+            name: payload.firstName + ' ' + payload.lastName + ' — Cracka Workshop',
+            status: 'open',
+            source: 'Cracka Systems - IES Landing Page'
+          })
+        });
+      })
+      .then(function (res) {
+        if (!res.ok) throw new Error('GHL opportunity error: ' + res.status);
+        return res.json();
+      })
+      .then(function () {
+        trackEvent('workshop_register');
+        window.location.href = 'thank-you/';
+      })
+      .catch(function (err) {
+        console.error('[IES] Form submission failed:', err);
+        submitBtn.textContent = 'SOMETHING WENT WRONG — TRY AGAIN';
+        submitBtn.disabled = false;
+        submitBtn.style.background = '#ff4444';
+        setTimeout(function () {
+          submitBtn.textContent = 'YES, SAVE MY SEAT (IT\'S FREE)';
+          submitBtn.style.background = '';
+        }, 3000);
+      });
     });
   }
 
