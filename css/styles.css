@@ -1065,9 +1065,9 @@ a {
     grid-template-columns: 1fr;
   }
 
-  /* Sticky mobile CTA */
+  /* Sticky mobile CTA — disabled */
   .sticky-mobile-cta {
-    display: block;
+    display: none;
   }
 
   /* Press logo marquee */
@@ -1089,9 +1089,8 @@ a {
     text-align: center;
   }
 
-  /* Add bottom padding for sticky CTA */
   .footer {
-    padding-bottom: 80px;
+    padding-bottom: 40px;
   }
 }
 
