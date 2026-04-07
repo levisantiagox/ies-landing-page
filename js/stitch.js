@@ -165,29 +165,51 @@
   }
 
   // ============================================
-  // 5. Vimeo Unmute Button
+  // 5. Vimeo Player Controls
   // ============================================
   var unmuteBtn = document.getElementById('unmute-btn');
+  var playPauseBtn = document.getElementById('playpause-btn');
   var vimeoIframe = document.getElementById('hero-vimeo');
 
-  if (unmuteBtn && vimeoIframe && typeof Vimeo !== 'undefined') {
+  if (vimeoIframe && typeof Vimeo !== 'undefined') {
     var player = new Vimeo.Player(vimeoIframe);
     var isMuted = true;
+    var isPlaying = true;
 
-    unmuteBtn.addEventListener('click', function () {
-      if (isMuted) {
-        player.setMuted(false);
-        player.setVolume(1);
-        isMuted = false;
-        unmuteBtn.querySelector('svg').innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>';
-        unmuteBtn.querySelector('span').textContent = 'TAP TO MUTE';
-      } else {
-        player.setMuted(true);
-        isMuted = true;
-        unmuteBtn.querySelector('svg').innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
-        unmuteBtn.querySelector('span').textContent = 'TAP TO UNMUTE';
-      }
-    });
+    // Mute / Unmute
+    if (unmuteBtn) {
+      unmuteBtn.addEventListener('click', function () {
+        if (isMuted) {
+          player.setMuted(false);
+          player.setVolume(1);
+          isMuted = false;
+          unmuteBtn.querySelector('.icon-muted').style.display = 'none';
+          unmuteBtn.querySelector('.icon-unmuted').style.display = 'block';
+        } else {
+          player.setMuted(true);
+          isMuted = true;
+          unmuteBtn.querySelector('.icon-muted').style.display = 'block';
+          unmuteBtn.querySelector('.icon-unmuted').style.display = 'none';
+        }
+      });
+    }
+
+    // Play / Pause
+    if (playPauseBtn) {
+      playPauseBtn.addEventListener('click', function () {
+        if (isPlaying) {
+          player.pause();
+          isPlaying = false;
+          playPauseBtn.querySelector('.icon-pause').style.display = 'none';
+          playPauseBtn.querySelector('.icon-play').style.display = 'block';
+        } else {
+          player.play();
+          isPlaying = true;
+          playPauseBtn.querySelector('.icon-pause').style.display = 'block';
+          playPauseBtn.querySelector('.icon-play').style.display = 'none';
+        }
+      });
+    }
   }
 
 })();
