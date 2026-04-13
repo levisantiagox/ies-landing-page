@@ -19,9 +19,9 @@ All the things you can change without touching core code.
 
 ## Dynamic Date (js/main.js, line 12)
 
-The date auto-calculates "next Thursday" from today. No manual update needed.
+The date is locked to **Tuesday 21 April 2026** until the day after that first workshop (controlled by `firstWorkshopCutoff`). From 22 April onwards it auto-calculates "next Tuesday" evergreen.
 
-If you need to change the workshop day (e.g. to Wednesday), edit the number `4` in the `getNextThursday()` function (0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat).
+To change the workshop day after the first one ships (e.g. to Wednesday), edit the number `2` in the `getNextWorkshopDate()` function (0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat). To change the first-workshop lock date, edit the `firstWorkshopCutoff` and the return value inside the `if (now < firstWorkshopCutoff)` block.
 
 ---
 

@@ -7,13 +7,20 @@
   'use strict';
 
   // ============================================
-  // 1. Dynamic Date — Next Thursday
+  // 1. Dynamic Date — First workshop locked to
+  //    Tuesday 21 April 2026, then evergreen next Tuesday
   // ============================================
-  function getNextThursday() {
+  function getNextWorkshopDate() {
+    // Lock to Tue 21 Apr 2026 until the day after — evergreen kicks in from 22 Apr
+    var firstWorkshopCutoff = new Date(2026, 3, 22, 0, 0, 0);
     var now = new Date();
-    var day = now.getDay(); // 0=Sun, 4=Thu
-    var daysUntil = (4 - day + 7) % 7;
-    // If today is Thursday, next Thursday is 7 days away
+    if (now < firstWorkshopCutoff) {
+      return new Date(2026, 3, 21);
+    }
+    // Evergreen: next Tuesday
+    var day = now.getDay(); // 0=Sun, 2=Tue
+    var daysUntil = (2 - day + 7) % 7;
+    // If today is Tuesday, next Tuesday is 7 days away
     if (daysUntil === 0) daysUntil = 7;
     var next = new Date(now);
     next.setDate(now.getDate() + daysUntil);
@@ -29,7 +36,7 @@
   }
 
   function injectDynamicDate() {
-    var dateStr = formatDate(getNextThursday());
+    var dateStr = formatDate(getNextWorkshopDate());
     var els = document.querySelectorAll('.dynamic-date');
     for (var i = 0; i < els.length; i++) {
       els[i].textContent = dateStr;
@@ -38,7 +45,7 @@
     var metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute('content',
-        'Free live workshop for metal roofers, fencers, gate fabricators and roof restorers. Watch a working enquiry-to-estimate system get built live in 44 minutes. Thursday ' + dateStr + ' at 4pm AEST.'
+        'Free live workshop for metal roofers, fencers, gate fabricators and roof restorers. Watch a working enquiry-to-estimate system get built live in 44 minutes. Tuesday ' + dateStr + ' at 4pm AEST.'
       );
     }
   }
@@ -333,11 +340,10 @@
   });
 
   // ============================================
-  // 7. Form Submission — GHL API
+  // 7. Form Submission — Cloudflare Worker Proxy
+  // GHL PIT and Location ID live server-side in worker/ghl-proxy.js
   // ============================================
-  var GHL_LOCATION_ID = 'MB0FQsSH7cixhHGS0hq0';
-  var GHL_PIT = 'pit-7264cdc8-3a9d-4faa-88b8-5095be6f3c9d';
-  var GHL_API = 'https://services.leadconnectorhq.com';
+  var FORM_PROXY = 'https://cracka-ghl-proxy.nwd-server.dev';
 
   var form = document.getElementById('register-form');
   if (form) {
@@ -375,48 +381,17 @@
         email: form.email.value.trim(),
         phone: form.phone.value.trim(),
         companyName: form.organisation.value.trim(),
-        website: form.website.value.trim() || undefined,
-        locationId: GHL_LOCATION_ID,
-        tags: ['cracka workshop'],
-        source: 'Cracka Systems - IES Landing Page'
+        website: form.website.value.trim() || undefined
       };
 
-      var ghlHeaders = {
-        'Authorization': 'Bearer ' + GHL_PIT,
-        'Content-Type': 'application/json',
-        'Version': '2021-07-28'
-      };
-
-      // Step 1: Create/update contact with tag
-      fetch(GHL_API + '/contacts/', {
+      // POST to Cloudflare Worker proxy (credentials stay server-side)
+      fetch(FORM_PROXY, {
         method: 'POST',
-        headers: ghlHeaders,
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       })
       .then(function (res) {
-        if (!res.ok) throw new Error('GHL contact error: ' + res.status);
-        return res.json();
-      })
-      .then(function (data) {
-        var contactId = data.contact.id;
-
-        // Step 2: Create opportunity in Online Tradies Workshop pipeline
-        return fetch(GHL_API + '/opportunities/', {
-          method: 'POST',
-          headers: ghlHeaders,
-          body: JSON.stringify({
-            pipelineId: 'mwois8wGmq2K2tyGuV3j',
-            pipelineStageId: '32d46166-94ee-4424-8fa3-21cc484665fa',
-            locationId: GHL_LOCATION_ID,
-            contactId: contactId,
-            name: payload.firstName + ' ' + payload.lastName + ' — Cracka Workshop',
-            status: 'open',
-            source: 'Cracka Systems - IES Landing Page'
-          })
-        });
-      })
-      .then(function (res) {
-        if (!res.ok) throw new Error('GHL opportunity error: ' + res.status);
+        if (!res.ok) throw new Error('Form submission error: ' + res.status);
         return res.json();
       })
       .then(function () {

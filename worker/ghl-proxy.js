@@ -12,6 +12,9 @@
 
 const GHL_API = 'https://services.leadconnectorhq.com';
 const ALLOWED_ORIGINS = [
+  'https://workshop.cracka.digital',
+  'https://cracka.digital',
+  'https://www.cracka.digital',
   'https://crackasystems.com.au',
   'https://www.crackasystems.com.au',
   'http://localhost',
